@@ -1,0 +1,48 @@
+@media all and (max-width: 1200px) {
+  // Fixed menu style & animation & animation scrolling //
+  .scrolling{
+    max-height: 100px;
+    background-color: #fff;
+  }
+  .scaleDown{
+    transform: scale(0.8);
+  }
+  .fixed-menu{
+    position: fixed;
+    max-height: 100px;
+    background-color: #fff;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: "lato_regular", sans-serif;
+    font-size: 20px;
+    transition: all 0.5s ease;
+  }
+  .content-menu{
+    height: inherit;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    //margin: auto;
+    padding-left: 15px;
+    transition: all 0.5s ease;
+    transform: scale(0.8);
+    .logo-menu{
+      height: 60px;
+      width: 66px;
+      text-align: center;
+      //margin: auto;
+      overflow: hidden;
+      background: url("../../assets/img/Logos/logo_color_twynker.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    ul{
+      display: none;
+    }
+  }
+  .icoHamburgerContainer{
+    display: flex ;
+    justify-content: center;
+  }
+}

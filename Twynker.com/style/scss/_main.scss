@@ -1,0 +1,1422 @@
+// Font import //
+@font-face {
+  font-family:"lato_regular";
+  src:url("../../assets/fonts/Lato_Regular.ttf");
+}
+@font-face {
+  font-family:"lato_light";
+  src:url("../../assets/fonts/Lato_Light.ttf");
+}
+// Variables //
+$Main_color: #000;
+$second_color: rgba(255, 255, 255, 0.8);
+$third_color: rgba(0, 0, 0, 0.6);
+$pink_color: #FF2589;
+
+// Standard styles //
+html, body{
+  padding: 0;
+  margin: 0;
+  border: 0;
+  overflow-x: hidden;
+}
+.noScroll{
+  overflow: hidden;
+  margin-right: 10px;
+}
+a{
+  color: inherit;
+  text-decoration: none;
+}
+ul{
+  padding: 0;
+  margin: 0;
+}
+p::selection, h1::selection,h2::selection, a::selection, input::selection, label::selection, span::selection, textarea::selection, button::selection{
+  background-color: #FF2589;
+  color: #FFF;
+}
+p::-moz-selection, h1::-moz-selection, h2::-moz-selection, a::-moz-selection, input::-moz-selection, label::-moz-selection, span::-moz-selection, textarea::-moz-selection,  button::-moz-selection{
+  background-color: #FF2589;
+  color: #FFF;
+}
+.separator{
+  height: 22px;
+  min-width: 100%;
+  background-color: #404040;
+  display: flex;
+  justify-content: center;
+  .slash{
+    height: inherit;
+    width: 53px;
+    img{
+      height: inherit;
+      width: auto;
+    }
+  }
+}
+.site-content{
+  height: 6000px;
+  min-width: 100%;
+  overflow: hidden;
+}
+// Scrollbar customization //
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: ligthen($third_color,10);
+}
+::-webkit-scrollbar-track {
+    background-color: darken($third_color,10);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: $third_color;
+    &:hover{
+      background-color: $pink_color;
+    }
+}
+// Back to top button //
+.hideOnModal{
+  display: none;
+}
+.backToTop{
+  position: fixed;
+  display: none;
+  justify-content: center;
+  bottom: 60px;
+  right: 30px;
+  height: 50px;
+  width: 50px;
+  color: #FFF;
+  background-color: #000;
+  opacity: 0.3;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+  &:hover{
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+}
+.arrowUp
+{
+  margin: 12px;
+  height: 25px;
+  width: 25px;
+  background-image: url("../../assets/img/Icons/arrow_up_twynker.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+// Fixed menu style & animation & animation scrolling //
+.scrolling{
+  max-height: 100px;
+  background-color: #fff;
+}
+.scaleDown{
+  transform: scale(0.8);
+}
+.fixed-menu{
+  position: fixed;
+  height: 120px;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: "lato_regular", sans-serif;
+  font-size: 20px;
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+.content-menu{
+  height: inherit;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding-left: 15px;
+  transition: all 0.5s ease;
+  .logo-menu{
+    height: 60px;
+    width: 66px;
+    text-align: center;
+    margin: 25px 10% 0 10%;
+    overflow: hidden;
+    background: url("../../assets/img/Logos/logo_black_twynker.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .logo-menu-color{
+    background: url("../../assets/img/Logos/logo_color_twynker.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  ul{
+    width: 350px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    li{
+      display: inline-block;
+      position: relative;
+      padding-bottom: 3px;
+      height: 25px;
+      overflow: hidden;
+      float: left;
+      text-transform: uppercase;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 0;
+        transition: width 0s ease, background .5s ease;
+      }
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        height: 3px;
+        width: 0;
+        background: #FF2589;
+        transition: width .5s ease;
+      }
+      &:hover:before {
+        width: 100%;
+        background: #FF2589;
+        transition: width .5s ease;
+      }
+      &:hover:after {
+        width: 100%;
+        background: transparent;
+        transition: all 0s ease;
+      }
+    }
+  }
+}
+.icoHamburgerContainer{
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+}
+.icoHamburger{
+  position: relative;
+  margin: auto;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  transition: transform 0.5s;
+  cursor: pointer;
+  span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: #000;
+    transition: background 0.5s;
+    &::before, &::after{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(-6px);
+      display: block;
+      width: 30px;
+      height: 2px;
+      background-color: #000;
+      transition: transform 0.5s;
+    }
+    &::after{
+      transform: translateY(6px);
+    }
+  }
+  &:hover{
+    span::before{
+      transform: translateY(-8px);
+    }
+    span::after{
+      transform: translateY(8px);
+    }
+  }
+  svg{
+    fill: transparent;
+    stroke-width: 1px;
+    stroke: $pink_color;
+    stroke-dasharray: 301;
+    stroke-dashoffset: 301;
+    transition: stroke-dashoffset 0.5s, transform 0.5s;
+  }
+  &.is-opened{
+    transform: rotate(180deg);
+    svg{
+      transform: rotate(-180deg);
+      stroke-dashoffset: 0;
+    }
+    span {
+      background: transparent;
+    }
+  }
+  &.is-opened{
+    span::before {
+     transform: translateY(0) rotate(45deg);
+   }
+  }
+  &.is-opened{
+    span::after {
+     transform: translateY(0) rotate(-45deg);
+   }
+  }
+}
+.minifiedMenu{
+  //display: none;
+  position: absolute;
+  text-align: center;
+  margin-top: -100%;
+  //margin-left: 100%;
+  width: 100%;
+  background-color: #fff;
+  transition: all 0.5s ease;
+  .minifiedList{
+    list-style-type: none;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    overflow: hidden;
+    a{
+      transition: color 0.3s ease;
+      &:hover{
+        color: $pink_color;
+      }
+    }
+  }
+}
+// Home page //
+// Home page animations //
+// Overlays animation //
+@keyframes overlayAnim {
+  0%{width: 50%; transform: skewX(0deg);}
+  50%{opacity: 0.4; width: 70%;}
+  100%{opacity: 0.2; width: 0%; transform: skewX(-35deg);}
+}
+.home{
+  height: 100vh;
+  min-width: 100%;
+  background-image: url("../../assets/img/Backgrounds/home_twynker.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.homeOverlayLeft{
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  opacity: 0.8;
+  background-color: #000;
+  transform-origin: top right;
+  z-index: 5;
+}
+.homeOverlayRight{
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background-color: #000;
+  opacity: 0.8;
+  transform-origin: bottom right;
+  z-index: 5;
+}
+.homeOverlayLeftAnim{
+  animation: overlayAnim 2s forwards;
+  animation-delay: 1s;
+}
+.homeOverlayRightAnim{
+  animation: overlayAnim 2s forwards;
+  animation-delay: 1s;
+}
+.logotype{
+  display: flex;
+  justify-content: center;
+  height: 220px;
+  width: auto;
+  padding-top: 270px;
+  padding-right: 40px;
+  img{
+    margin: auto;
+    height: inherit;
+    width: auto;
+  }
+}
+.activity{
+  text-align: center;
+  margin-top: 10px;
+  p{
+    margin: 0;
+    font-family: "lato_light", sans-serif;
+    font-size: 68px;
+    text-transform: uppercase;
+    letter-spacing: 15px;
+  }
+}
+.home-btn-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+  button{
+    height: 66px;
+    width: 305px;
+    font-family: "lato_regular";
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: $second_color;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 2px;
+    border-color: $second_color;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.5s ease-out;
+    &:hover{
+      color: #FFF;
+      background-color: $pink_color;
+      border-color: $pink_color;
+    }
+  }
+}
+// Agency page //
+@keyframes profilePicJhayznAnim {
+  from{opacity: 0; transform: translateX(-300px);}
+  to{opacity: 1; transform: translateX(0);}
+}
+@keyframes profilePicPragmaAnim {
+  from{opacity: 0; transform: translateX(300px);}
+  to{opacity: 1; transform: translateX(0);}
+}
+.jhayznPicAnimation{
+  visibility: visible!important;
+  animation: profilePicJhayznAnim 1.5s;
+}
+.pragmaPicAnimation{
+  visibility: visible!important;
+  animation: profilePicPragmaAnim 1.5s;
+}
+.agency{
+  min-width: 100%;
+  padding-bottom: 45px;
+  background-image: url("../../assets/img/Backgrounds/agence_twynker.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+}
+.profilePics{
+  display: flex;
+  justify-content: space-around;
+  width: 95%;
+  height: 70%;
+  margin: auto;
+  padding-top: 105px;
+  .jhayzn, .pragmapik{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 95%;
+    width: 40%;
+    float: left;
+    .picContainerJhayZn{
+      visibility: hidden;
+      height: 265px;
+      width: 265px;
+      margin: auto;
+      background-color: $second_color;
+      border-radius: 265px;
+      border-style: solid;
+      border-width: 3px;
+      border-color: $pink_color;
+      background-image: url("../../assets/img/Photos/jason_twynker_pic.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .picContainerPragma{
+      visibility: hidden;
+      height: 265px;
+      width: 265px;
+      margin: auto;
+      background-color: $second_color;
+      border-radius: 265px;
+      border-style: solid;
+      border-width: 3px;
+      border-color: $pink_color;
+      background-image: url("../../assets/img/Photos/romain_twynker_pic.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .firstName{
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 5px;
+      font-family: "lato_regular";
+      font-size: 26px;
+      text-transform: uppercase;
+      p{
+        margin: 0;
+      }
+    }
+    .statut{
+      margin: auto;
+      margin-bottom: 20px;
+      font-family: "lato_regular";
+      text-align: center;
+    }
+    .profileDescription{
+      display: flex;
+      justify-content: center;
+      padding: 25px;
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      background-color: $second_color;
+      border-radius: 25px;
+      p{
+        margin: auto;
+        font-family: "lato_regular";
+        font-size: 20px;
+        text-align: justify;
+        padding: 20px;
+      }
+    }
+  }
+}
+.comment{
+  display: flex;
+  justify-content: center;
+  width: 85%;
+  margin: auto;
+  margin-top: 30px;
+  background-color: $third_color;
+  color: #FFF;
+  border-radius: 25px;
+  p{
+    margin: auto;
+    font-family: "lato_regular";
+    font-size: 20px;
+    text-align: justify;
+    padding: 20px 100px;
+  }
+}
+// Services page //
+.services{
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+  padding-bottom: 45px;
+  background-image: url("../../assets/img/Backgrounds/services_twynker.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+}
+.servicesContainer{
+  display: flex;
+  justify-content: space-between;
+  width: 72%;
+  height: 60%;
+  margin-left: 100px;
+  padding-top: 100px;
+  .serviceDevelopement, .serviceGraphism{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 45%;
+    .icoDevelopement{
+      height: 190px;
+      width: 190px;
+      margin: auto;
+      margin-top: 5px;
+      margin-bottom: 40px;
+      background-image: url("../../assets/img/Icons/developpement_twynker.png");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .icoGraphism{
+      height: 190px;
+      width: 190px;
+      margin: auto;
+      margin-top: 5px;
+      margin-bottom: 40px;
+      background-image: url("../../assets/img/Icons/graphisme_twynker.png");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .developementContainer, .graphismContainer{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      padding: 10px;
+      background-color: $second_color;
+      border-radius: 25px;
+      .servicesExplain{
+        margin: 10px 15px;
+        h1{
+          margin-bottom: 2px;
+          color: $pink_color;
+          font-family: "lato_light";
+          font-size: 20px;
+          text-transform: uppercase;
+        }
+        p{
+          margin-top: 0;
+          font-family: "lato_regular";
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+.devisPerso{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 55%;
+  margin: auto;
+  margin-top: 45px;
+  margin-left: 190px;
+  padding: 30px;
+  color: #FFF;
+  background-color: $third_color;
+  border-radius: 25px;
+  p{
+    margin: auto;
+    margin-right: 0;
+    font-family: "lato_regular";
+    font-size: 25px;
+    text-transform: uppercase;
+  }
+  h1{
+    margin: auto;
+    margin-left: 50px;
+    a{
+      text-decoration: none;
+      color: inherit;
+      p{
+        text-transform: uppercase;
+        font-family: "lato_regular";
+        font-size: 28px;
+        letter-spacing: 2px;
+        transition: all 0.5s ease;
+        &:hover{
+          color: $pink_color;
+          letter-spacing: 3px;
+        }
+      }
+    }
+  }
+}
+// Realisation page //
+.realisations{
+  height: 100vh;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  background-image: url("../../assets/img/Backgrounds/realisations_twynker.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.incoming{
+  min-height: 100%;
+  min-width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  .WIP{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100px;
+    width: 40%;
+    margin-top: 30%;
+    margin-right: 30px;
+    h1{
+      font-family: "lato_light";
+      font-size: 30px;
+      text-transform: uppercase;
+      color: $pink_color;
+      margin: 0;
+    }
+    p{
+      font-family: "lato_regular";
+      font-size: 25px;
+      margin: 0;
+    }
+  }
+}
+.realisationsContainer{
+  width: 85%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  //background-color: grey;
+}
+.realizedProjects{
+  width: 400px;
+  height: 300px;
+  margin: 20px;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all 0.5s ease;
+  &:hover{
+    transform: scale(1.1);
+    background-color: rgba(0,0,0,0.5);
+  }
+}
+.projectTargetLink{
+}
+#project1{
+  background-image: url("../../assets/img/Photos/american_dad.jpg");
+}
+#project2{
+  background-image: url("../../assets/img/Photos/american_dad.jpg");
+}
+#project3{
+  background-image: url("../../assets/img/Photos/american_dad.jpg");
+}
+#project4{
+  background-image: url("../../assets/img/Photos/american_dad.jpg");
+}
+#project5{
+  background-image: url("../../assets/img/Photos/american_dad.jpg");
+}
+#project6{
+  background-image: url("../../assets/img/Photos/american_dad.jpg");
+}
+#project7{
+  background-image: url("../../assets/img/Photos/american_dad.jpg");
+}
+#project8{
+  background-image: url("../../assets/img/Photos/american_dad.jpg");
+}
+#project9{
+  background-image: url("../../assets/img/Photos/american_dad.jpg");
+}
+// Contact page //
+.contact{
+  height: 18%;
+  min-width: 100%;
+  background-image: url("../../assets/img/Backgrounds/contact_twynker.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.contactHeader{
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+  padding-top: 150px;
+  p{
+    margin: 0;
+    font-family: "lato_regular";
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+}
+.devisGratuit{
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+  p{
+    margin: 0;
+    font-family: "lato_regular";
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+}
+.contactContainer{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: auto;
+  margin-top: 80px;
+  height: 65%;
+  width: 95%;
+  .boxContact{
+    margin: auto;
+    //height: 630px;
+    width: 500px;
+    background-color: $second_color;
+    border-radius: 25px;
+    .icoOrder{
+      height: 122px;
+      width: 122px;
+      margin: auto;
+      margin-top: 60px;
+      background-image: url("../../assets/img/Icons/order_twynker.png");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .icoEvent{
+      height: 122px;
+      width: 122px;
+      margin: auto;
+      margin-top: 60px;
+      background-image: url("../../assets/img/Icons/event_twynker.png");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .icoOther{
+      height: 122px;
+      width: 122px;
+      margin: auto;
+      margin-top: 60px;
+      background-image: url("../../assets/img/Icons/other_twynker.png");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    h1{
+      margin: 0;
+      margin-top: 60px;
+      font-family: "lato_regular";
+      font-size: 30px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    p{
+      margin: 60px 60px;
+      font-family: "lato_regular";
+      font-size: 18px;
+      text-align: justify;
+    }
+    .boxButton{
+      display: flex;
+      justify-content: center;
+      height: 60px;
+      width: 100%;
+      margin-bottom: 40px;
+      button{
+        margin: auto;
+        height: 60px;
+        width: 220px;
+        font-family: "lato_regular";
+        font-size: 20px;
+        text-transform: uppercase;
+        color: #FFF;
+        background-color: $pink_color;
+        border-style: none;
+        border-radius: 25px;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.5s ease;
+        &:hover{
+          transform: scale(1.1);
+          letter-spacing: 2px;
+        }
+      }
+    }
+  }
+}
+// Basic modal style //
+.modal-overlay{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 10;
+}
+.btn-closeModal{
+  margin-left: 94%;
+  margin-top: 2%;
+  font-size: 22px;
+  width: 30px;
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+  outline: none;
+}
+.reqStar{
+  color: $pink_color;
+  font-weight: bolder;
+  margin-right: 5px;
+}
+.socialGender{
+  margin-left: 20px;
+  padding-left: 5px;
+  width: 3%;
+  height: 17px;
+  cursor: pointer;
+}
+.informationClient{
+  font-family: "lato_light";
+  font-size: 16px;
+  margin-left: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 220px;
+  height: 22px;
+  border-color: $third_color;
+  border-style: solid;
+  border-width: 1px;
+  outline-color: $pink_color;
+}
+.com-content{
+  height: 200px;
+}
+.com{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding-left: 70px;
+  margin-right: 25px;
+  span{
+    width: 160px;
+    font-size: 12px;
+  }
+}
+.com-container{
+  width: 225px;
+  outline: $pink_color;
+  border-color: $third_color;
+  font-family: "lato_light";
+  font-size: 14px;
+  resize: none;
+}
+.modal-btn-container{
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-submit{
+  margin-right: 3%;
+  margin-bottom: 3%;
+  margin-top: 3%;
+  height: 60px;
+  width: 220px;
+  font-family: "lato_regular";
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #FFF;
+  background-color: $pink_color;
+  border-style: none;
+  border-radius: 25px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.5s ease;
+  &:hover{
+    transform: scale(1.1);
+    font-size: 0px;
+    background-image: url("../../assets/img/Icons/mail_twynker.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}
+// Modal boxes animation //
+@keyframes orderModalAnim {
+  from{left: -30%; opacity: 0; transform: scale(0.7);}
+  to{left: 0; opacity: 1; transform: scale(1);}
+}
+@keyframes orderWrapperAnim {
+  from{transform: translateY(-30px); opacity: 0;}
+  to{transform: translateY(0); opacity: 1;}
+}
+@keyframes eventModalAnim {
+  from{opacity: 0; transform: scale(0.7);}
+  to{opacity: 1; transform: scale(1);}
+}
+@keyframes otherModalAnim {
+  from{right: -30%; opacity: 0; transform: scale(0.7);}
+  to{right: 0; opacity: 1; transform: scale(1);}
+}
+// Order modal Box //
+.order-modal-container{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+}
+.order-modal-box{
+  position: relative;
+  width: 700px;
+  height: auto;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 25px;
+  z-index: 20;
+  animation: orderModalAnim 0.7s;
+}
+.icoOrderModal{
+  height: 122px;
+  width: 122px;
+  margin: auto;
+  margin-top: 2%;
+  background-image: url("../../assets/img/Icons/order_twynker.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.orderModalTitle{
+  margin: auto;
+  margin-top: 6%;
+  font-size: 36px;
+  font-family: "lato_regular";
+  text-transform: uppercase;
+  text-align: center;
+}
+.orderContactForm
+{
+  font-family: "lato_light";
+  font-size: 18px;
+  form{
+    display: flex;
+    flex-direction: column;
+    padding-right: 30%;
+    p{
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 0;
+      margin-top: 25px;
+    }
+  }
+}
+.wrapper{
+  display: flex;
+  justify-content: flex-end;
+  span{
+    margin-top: 25px;
+  }
+}
+.wrapper-dropDown{
+  margin-top: 25px;
+}
+.selectedObject{
+  font-family: "lato_light";
+  font-size: 16px;
+  margin-left: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 220px;
+  height: 22px;
+  border-color: $third_color;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+}
+.dropDown{
+  display: none;
+  position: absolute;
+  margin-top: -1px;
+  margin-left: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
+  list-style-type: none;
+  background-color: #FFF;
+  border-style: solid;
+  border-top: none;
+  border-width: 1px;
+  border-color: $third_color;
+  width: 220px;
+  font-size: 15px;
+  //transition: all 0.5s ease;
+  animation: orderWrapperAnim 0.8s;
+}
+.selObj{
+  margin: 5px 0 0 0;
+  &:hover{
+    cursor: pointer;
+    color: #FFF;
+    font-weight: bolder;
+    background-color: lighten($pink_color, 10);
+  }
+}
+// Event modal Box //
+.event-modal-container{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+}
+.event-modal-box{
+  position: relative;
+  width: 700px;
+  height: auto;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 25px;
+  z-index: 20;
+  animation: eventModalAnim 0.7s;
+}
+.icoEventModal{
+  height: 122px;
+  width: 122px;
+  margin: auto;
+  margin-top: 2%;
+  background-image: url("../../assets/img/Icons/event_twynker.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.eventModalTitle{
+  margin: auto;
+  margin-top: 6%;
+  font-size: 36px;
+  font-family: "lato_regular";
+  text-transform: uppercase;
+  text-align: center;
+}
+.eventContactForm
+{
+  font-family: "lato_light";
+  font-size: 18px;
+  form{
+    display: flex;
+    flex-direction: column;
+    padding-right: 30%;
+    p{
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 0;
+      margin-top: 25px;
+    }
+  }
+}
+// Other modal Box //
+.other-modal-container{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+}
+.other-modal-box{
+  position: relative;
+  width: 700px;
+  height: auto;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 25px;
+  z-index: 20;
+  animation: otherModalAnim 0.7s;
+}
+.icoOtherModal{
+  height: 122px;
+  width: 122px;
+  margin: auto;
+  margin-top: 2%;
+  background-image: url("../../assets/img/Icons/other_twynker.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.otherModalTitle{
+  margin: auto;
+  margin-top: 6%;
+  font-size: 36px;
+  font-family: "lato_regular";
+  text-transform: uppercase;
+  text-align: center;
+}
+.otherContactForm
+{
+  font-family: "lato_light";
+  font-size: 18px;
+  form{
+    display: flex;
+    flex-direction: column;
+    padding-right: 30%;
+    p{
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 0;
+      margin-top: 25px;
+    }
+  }
+}
+// Legal page//
+.legalContainer{
+  min-height: 90vh;
+  min-width: 100%;
+  overflow: hidden;
+}
+.legal{
+  display: flex;
+  flex-direction: column;
+  height: 92vh;
+  min-width: 100%;
+  background-image: url("../../assets/img/Backgrounds/legal_twynker.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow-y: auto;
+  .legalTitle{
+    margin: auto;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    font-family: "lato_light";
+    font-weight: lighter;
+    font-size: 42px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+  }
+}
+.legalContent{
+  font-family: "lato_light";
+  font-size: 18px;
+  padding-left: 10%;
+  padding-right: 10%;
+  p{
+    text-align: justify;
+  }
+}
+
+//footer//
+.mainFooter{
+  height: 100px;
+  min-width: 100%;
+  background-color: #FFF;
+}
+.footerContainer{
+  display: flex;
+  height: inherit;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: -20px;;
+  justify-content: space-between;
+  background-color: #FFF;
+  background-attachment: fixed;
+  .mentions{
+    display: flex;
+    font-family: "lato_light";
+    font-size: 20px;
+    text-transform: uppercase;
+    a{
+      color: inherit;
+      &:hover{
+        color: #FF2589;
+      }
+    }
+    p{
+      margin: auto;
+    }
+  }
+  .socialMedia{
+    display: flex;
+    font-family: "lato_light";
+    font-size: 18px;
+    margin-left: 80px;
+    a{
+      display: flex;
+    }
+    p{
+      margin: auto;
+    }
+    .twynkerBlack{
+      height: 60%;
+      width: 200px;
+      margin: auto;
+      margin-left: 10px;
+      margin-right: 10px;
+      background-image: url("../../assets/img/Logos/logotype_black_twynker.png");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      &:hover{
+        background-image: url("../../assets/img/Logos/logotype_color_twynker.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+    .facebookLink{
+      height: 55%;
+      width: 55px;
+      margin: auto;
+      margin-left: 10px;
+      margin-right: 10px;
+      background-image: url("../../assets/img/Icons/facebook_twynker.png");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      border-radius: 25px;
+      &:hover{
+        background-image: url("../../assets/img/Icons/facebook_color_twynker.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+    .twitterLink{
+      height: 55%;
+      width: 55px;
+      margin: auto;
+      margin-left: 10px;
+      margin-right: 10px;
+      background-image: url("../../assets/img/Icons/twitter_twynker.png");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      border-radius: 25px;
+      &:hover{
+        background-image: url("../../assets/img/Icons/twitter_color_twynker.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+  .copyright{
+    display: flex;
+    font-family: "lato_light";
+    font-size: 18px;
+    p{
+      margin: auto;
+    }
+  }
+}
+//Footer legal mentions //
+.legalFooter{
+  position: fixed;
+  height: 8vh;
+  min-width: 100%;
+  background-color: #FFF;
+}
+.legalfooterContainer{
+  display: flex;
+  height: inherit;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: -20px;;
+  justify-content: space-between;
+  background-color: #FFF;
+  background-attachment: fixed;
+  .legalmentions{
+    display: flex;
+    visibility: hidden;
+    font-family: "lato_light";
+    font-size: 20px;
+    text-transform: uppercase;
+    a{
+      color: inherit;
+      &:hover{
+        color: #FF2589;
+      }
+    }
+    p{
+      margin: auto;
+    }
+  }
+  .legalsocialMedia{
+    display: flex;
+    font-family: "lato_light";
+    font-size: 18px;
+    margin-left: 80px;
+    a{
+      display: flex;
+    }
+    p{
+      margin: auto;
+    }
+    .legaltwynkerBlack{
+      height: 60%;
+      width: 200px;
+      margin: auto;
+      margin-left: 10px;
+      margin-right: 10px;
+      background-image: url("../../assets/img/Logos/logotype_black_twynker.png");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      &:hover{
+        background-image: url("../../assets/img/Logos/logotype_color_twynker.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+    .legalfacebookLink{
+      height: 55%;
+      width: 55px;
+      margin: auto;
+      margin-left: 10px;
+      margin-right: 10px;
+      background-image: url("../../assets/img/Icons/facebook_twynker.png");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      border-radius: 25px;
+      &:hover{
+        background-image: url("../../assets/img/Icons/facebook_color_twynker.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+    .legaltwitterLink{
+      height: 55%;
+      width: 55px;
+      margin: auto;
+      margin-left: 10px;
+      margin-right: 10px;
+      background-image: url("../../assets/img/Icons/twitter_twynker.png");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      border-radius: 25px;
+      &:hover{
+        background-image: url("../../assets/img/Icons/twitter_color_twynker.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+  .legalcopyright{
+    display: flex;
+    font-family: "lato_light";
+    font-size: 18px;
+    p{
+      margin: auto;
+    }
+  }
+}
